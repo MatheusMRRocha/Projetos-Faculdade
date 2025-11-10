@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 
-// Deposito.java (A classe com o problema)
+// Classe agora esta aceitando tipos genericos, representado por T
 public class Deposito<T> {
     private List<T> itens = new ArrayList();
 

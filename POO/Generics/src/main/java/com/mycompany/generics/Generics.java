@@ -14,8 +14,6 @@ import com.mycompany.generics.Classes.Produto;
  * @author Matheus
  */
 public class Generics {
-
-// Main.java (Demonstração do problema)
     public static void main(String[] args) {
         Deposito<Eletronico> depositoEletronico = new Deposito<>();
         Deposito<Alimento> depositoAlimento = new Deposito<>();
@@ -24,7 +22,7 @@ public class Generics {
         depositoEletronico.adicionarItem(new Eletronico("Notebook"));
         
         //Amazenamento com erro para apresentação
-        //depositoEletronico.adicionarItem(new Alimento("Maçã"));
+        //depositoEletronico.adicionarItem(new Alimento("Maca"));
         //Amazenamento correto
         depositoAlimento.adicionarItem(new Alimento("Maca"));
         
