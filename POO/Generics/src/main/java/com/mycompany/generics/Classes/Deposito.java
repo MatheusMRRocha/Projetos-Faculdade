@@ -16,11 +16,11 @@ import java.util.List;
 public class Deposito<T> {
     private List<T> itens = new ArrayList();
 
-    public void adicionarItem(Object item) {
-        this.itens.add((T) item);
+    public void adicionarItem(T item){
+        this.itens.add(item);
     }
 
-    public Object obterItem(int index) {
+    public T obterItem(int index) {
         return this.itens.get(index);
     }
 }

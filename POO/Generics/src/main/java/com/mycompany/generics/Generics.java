@@ -23,10 +23,10 @@ public class Generics {
         depositoGeral.adicionarItem(new Eletronico("Notebook"));
         depositoGeral.adicionarItem(new Alimento("Maçã"));
         
-        Produto primeiroItem = (Produto) depositoGeral.obterItem(0);
+        Produto primeiroItem = depositoGeral.obterItem(0);
         System.out.println("Item recuperado: " + primeiroItem);
 
-        Produto itemProblematico = (Produto) depositoGeral.obterItem(2);
+        Produto itemProblematico = depositoGeral.obterItem(2);
         System.out.println("Item recuperado: " + itemProblematico);
     }
 }
