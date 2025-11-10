@@ -10,7 +10,9 @@ package com.mycompany.generics.Classes;
  */
 
 // Alimento.java
-public class Alimento extends Produto {
-    public Alimento(String nome) { super(nome); }
+public class Alimento extends Produto{
+    public Alimento(String nome){
+        super(nome);
+    }
 }
 

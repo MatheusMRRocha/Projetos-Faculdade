@@ -10,10 +10,17 @@ package com.mycompany.generics.Classes;
  */
 
 // Produto.java (Classe base)
-public abstract class Produto {
+public abstract class Produto{
     private String nome;
-    public Produto(String nome) { this.nome = nome; }
-    public String getNome() { return nome; }
+    
+    public Produto(String nome){
+        this.nome = nome; 
+    }
+    public String getNome(){
+        return nome;
+    }
     @Override
-    public String toString() { return "Produto: " + nome; }
+    public String toString(){
+        return "Produto: " + nome; 
+    }
 }

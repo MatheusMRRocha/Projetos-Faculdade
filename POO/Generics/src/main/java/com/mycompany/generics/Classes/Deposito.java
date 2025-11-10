@@ -13,11 +13,11 @@ import java.util.List;
 
 
 // Deposito.java (A classe com o problema)
-public class Deposito {
-    private List itens = new ArrayList(); // Usa List sem tipo!
+public class Deposito<T> {
+    private List<T> itens = new ArrayList();
 
     public void adicionarItem(Object item) {
-        this.itens.add(item);
+        this.itens.add((T) item);
     }
 
     public Object obterItem(int index) {

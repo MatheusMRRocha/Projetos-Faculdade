@@ -11,5 +11,7 @@ package com.mycompany.generics.Classes;
 
 // Eletronico.java
 public class Eletronico extends Produto {
-    public Eletronico(String nome) { super(nome); }
+    public Eletronico(String nome){
+        super(nome);
+    }
 }
