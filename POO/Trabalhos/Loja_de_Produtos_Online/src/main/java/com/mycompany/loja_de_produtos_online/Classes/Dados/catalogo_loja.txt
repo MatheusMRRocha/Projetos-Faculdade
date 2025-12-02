@@ -1,0 +1,2 @@
+FISICO|celular|2000.00|celular|1.00;'1','1','1'
+DIGITAL|livro|30.00|livro digital|livro.www

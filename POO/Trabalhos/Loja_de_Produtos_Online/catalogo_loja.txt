@@ -1,0 +1,1 @@
+FISICO|celular|2000,00|celular|1.0;'1','5','3'
