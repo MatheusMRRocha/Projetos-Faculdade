@@ -21,10 +21,10 @@ public class PagamentoCartao implements PagamentoStrategy {
 
     @Override
     public boolean pagar(double valor) {
-        System.out.printf("[Pagamento Cartão] Processando debito de R$ %.2f...\n", valor);
+        System.out.printf("[Pagamento Cartao] Processando debito de R$ %.2f...\n", valor);
         String numeroFormatado = numeroCartao.length() >= 4 ? numeroCartao.substring(0, 4) + " **** **** ****" : "ERRO";
         System.out.printf("Titular: %s | Cartão: %s\n", nomeTitular, numeroFormatado);
-        System.out.println("Transação aprovada com sucesso via Cartao de Credito.");
+        System.out.println("Transacao aprovada com sucesso via Cartao de Credito.");
         return true;
     }
     

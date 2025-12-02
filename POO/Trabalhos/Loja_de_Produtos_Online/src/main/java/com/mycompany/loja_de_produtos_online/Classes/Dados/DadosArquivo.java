@@ -39,7 +39,7 @@ public class DadosArquivo implements IDados {
         File file = new File(caminhoArquivo);
         
         if (!file.exists()) {
-            System.out.printf("[Persistência] Arquivo nao encontrado: %s, Retornando lista vazia.\n", caminhoArquivo);
+            System.out.printf(" Arquivo nao encontrado: %s, Retornando lista vazia.\n", caminhoArquivo);
             return linhas;
         }
 

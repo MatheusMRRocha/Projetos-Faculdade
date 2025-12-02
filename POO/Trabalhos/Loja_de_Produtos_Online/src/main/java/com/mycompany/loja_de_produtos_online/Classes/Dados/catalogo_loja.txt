@@ -1,2 +1,3 @@
-FISICO|celular|2000.00|celular|1.00;'1','1','1'
+FISICO|celular|2000.00|celular|1.00;'P'
 DIGITAL|livro|30.00|livro digital|livro.www
+FISICO|relogio|250.00|relogio eletronico|1.00;'P'

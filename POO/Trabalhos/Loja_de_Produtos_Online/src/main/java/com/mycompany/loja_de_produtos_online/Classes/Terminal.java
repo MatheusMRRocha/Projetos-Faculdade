@@ -22,7 +22,7 @@ public class Terminal {
     private final ProdutoFactory factory;
     private final Scanner scanner;
     
-    private final String CAMINHO_ARQUIVO_CATALOGO = "C:\\Users\\mathe\\OneDrive\\Documentos\\GitHub\\Projetos-Faculdade\\POO\\Trabalhos\\Loja_de_Produtos_Online\\src\\main\\java\\com\\mycompany\\loja_de_produtos_online\\Classes\\Dados\\catalogo_loja.txt";
+    private final String CAMINHO_ARQUIVO_CATALOGO = "..\\Loja_de_Produtos_Online\\src\\main\\java\\com\\mycompany\\loja_de_produtos_online\\Classes\\Dados\\catalogo_loja.txt";
 
     public Terminal(Catalogo<Produto> catalogo, ProdutoFactory factory){
         this.catalogo = catalogo;

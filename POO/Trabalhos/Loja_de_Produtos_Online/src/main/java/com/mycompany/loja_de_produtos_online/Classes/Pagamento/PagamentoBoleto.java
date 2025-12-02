@@ -20,7 +20,6 @@ public class PagamentoBoleto implements PagamentoStrategy {
     @Override
     public boolean pagar(double valor) {
         System.out.printf("[Pagamento Boleto] Gerando boleto de R$ %.2f...\n", valor);
-        // Em um sistema real, aqui haveria a comunicação com um banco para gerar o código de barras.
         System.out.printf("CPF do Cliente: %s\n", cpf);
         System.out.println("Boleto gerado com sucesso. O produto será liberado apos a compensação bancaria.");
         return true;
