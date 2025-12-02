@@ -20,7 +20,7 @@ public class ProcessadorPedido {
 
     public void finalizarPedido(CarrinhoDeCompras carrinho) {
         if (estrategiaPagamento == null) {
-            System.err.println("[ERRO] Nenhuma estratégia de pagamento definida.");
+            System.err.println("[ERRO] Nenhuma pagamento definida");
             return;
         }
 

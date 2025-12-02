@@ -16,7 +16,7 @@ import java.util.Map;
 public class ProdutoDigitalFactory implements IProdutoFactory {
     @Override
     public Produto criar(String nome, double preco, String descricao, Map<String, Object> parametros) {
-        // Obtenção segura do parâmetro específico
+        
         String downloadUrl = (String) parametros.getOrDefault("downloadUrl", "N/A");
         
         return new ProdutoDigital(nome, preco, descricao, downloadUrl);

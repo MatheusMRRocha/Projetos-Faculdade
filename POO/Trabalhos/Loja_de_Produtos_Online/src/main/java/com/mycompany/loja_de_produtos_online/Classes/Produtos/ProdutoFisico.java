@@ -30,6 +30,6 @@ public class ProdutoFisico extends Produto {
     
     @Override
     public String exibirDetalhes(){
-        return String.format("Peso: %.2f kg,Dimensões: %s", peso, dimensao);
+        return String.format("Peso: %.2f kg,Dimensoes: %s", peso, dimensao);
     }
 }

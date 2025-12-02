@@ -25,10 +25,6 @@ public class CarrinhoDeCompras  implements ICarrinho{
         this.itens.add(item);
     }
 
-    /**
-     * Remove um item do carrinho.
-     * @param item O item a ser removido.
-     */
     public void removerItem(ICarrinho item) {
         this.itens.remove(item);
     }
@@ -42,30 +38,23 @@ public class CarrinhoDeCompras  implements ICarrinho{
     public double getPrecoTotal() {
         double total = 0.0;
         for (ICarrinho item : itens) {
-            // Chamada recursiva: Se for um Composite, ele somará seus sub-itens.
-            // Se for uma Folha (Produto), ele retornará seu preço.
             total += item.getPrecoTotal();
         }
         return total;
     }
 
-    /**
-     * Implementação do método do Componente (ICarrinho) para exibir os itens.
-     */
     @Override
     public void exibirItens() {
-        System.out.println("\n--- Conteúdo do Carrinho ---");
+        System.out.println("\n--- Conteudo do Carrinho ---");
         if (itens.isEmpty()) {
-            System.out.println("O carrinho está vazio.");
+            System.out.println("O carrinho esta vazio.");
             return;
         }
         for (ICarrinho item : itens) {
-            // Verifica se o item é um Produto para exibir detalhes formatados.
             if (item instanceof Produto) {
                 Produto p = (Produto) item;
                 System.out.printf("- %s (ID: %d) | Preço: R$ %.2f\n", p.getNome(), p.getId(), p.getPreco());
             } else {
-                // Se for outro Composite (ex: um Combo), chama recursivamente o exibirItens.
                 item.exibirItens(); 
             }
         }

@@ -27,12 +27,9 @@ public class Catalogo<T extends Produto> {
 
     public void adicionarProduto(T produto) {
         this.produtos.add(produto);
-        System.out.printf("Produto Adicionado ao Catálogo: %s\n", produto.getNome());
+        System.out.printf("Produto Adicionado ao Catalogo: %s\n", produto.getNome());
     }
 
-    // --- Lógica de Serialização/Desserialização (Corrigida) ---
-    
-    // Serializa Produtos em linhas de texto, garantindo formato decimal US (ponto)
     private List<String> serializar() {
         List<String> linhas = new ArrayList<>();
         for (Produto p : produtos) {
@@ -43,7 +40,6 @@ public class Catalogo<T extends Produto> {
                 tipo = TiposProduto.FISICO.name();
                 ProdutoFisico pf = (ProdutoFisico) p;
                 
-                // Formata o peso usando Locale.US para garantir o separador '.'
                 String pesoFormatado = String.format(Locale.US, "%.2f", pf.getPeso());
                 param = pesoFormatado + ";" + pf.getDimensao();
                 
@@ -55,23 +51,20 @@ public class Catalogo<T extends Produto> {
                 continue;
             }
             
-            // Formata o preço usando Locale.US para garantir o separador '.'
             linhas.add(String.format(Locale.US, "%s|%s|%.2f|%s|%s", 
                 tipo, p.getNome(), p.getPreco(), p.getDescricao(), param));
         }
         return linhas;
     }
-
-    // Desserializa linhas de texto em objetos Produto
+    
     private void desserializar(List<String> linhas) {
-        // Limpa a lista atual, preparando para o carregamento
         this.produtos.clear(); 
         
-        for (String linha : linhas) {
+        for (String linha : linhas){
             // Usa o separador padrão |
             String[] partes = linha.split("\\|");
             if (partes.length < 5) {
-                 System.err.printf("[Desserialização] Linha ignorada devido a formato inválido (menos de 5 partes): %s\n", linha);
+                 System.err.printf("[Desserialização] Linha ignorada devido a formato invalido (menos de 5 partes): %s\n", linha);
                  continue;
             }
 
@@ -79,7 +72,6 @@ public class Catalogo<T extends Produto> {
                 TiposProduto tipo = TiposProduto.valueOf(partes[0]);
                 String nome = partes[1];
                 
-                // Trata o preço: substitui vírgulas por pontos antes de tentar o parse, para robustez.
                 String precoStr = partes[2].replace(',', '.'); 
                 double preco = Double.parseDouble(precoStr);
                 
@@ -91,14 +83,13 @@ public class Catalogo<T extends Produto> {
                 if (tipo == TiposProduto.FISICO) {
                     String[] subParams = paramBruto.split(";");
                     
-                    // Trata o peso: substitui vírgulas por pontos antes de tentar o parse.
                     String pesoStr = subParams[0].replace(',', '.'); 
                     double peso = Double.parseDouble(pesoStr);
                     
                     String dimensao = subParams[1];
                     params = Map.of("peso", peso, "dimensao", dimensao);
                     
-                } else { // DIGITAL
+                } else {
                     String downloadUrl = paramBruto;
                     params = Map.of("downloadUrl", downloadUrl);
                 }
@@ -108,11 +99,10 @@ public class Catalogo<T extends Produto> {
                 this.produtos.add(produto);
 
             } catch (Exception e) {
-                // Mensagem de erro mais detalhada para facilitar o debug
                 System.err.printf("[Desserialização] FALHA ao processar linha: %s. Erro: %s\n", linha, e.toString());
             }
         }
-        System.out.printf("[Catálogo] %d produtos carregados.\n", this.produtos.size());
+        System.out.printf("[Catalogo] %d produtos carregados.\n", this.produtos.size());
     }
     
     
@@ -137,9 +127,9 @@ public class Catalogo<T extends Produto> {
     }
 
     public void exibirCatalogo() {
-        System.out.println("\n=== Catálogo de Produtos ===");
+        System.out.println("\n=== Catalogo de Produtos ===");
         if (produtos.isEmpty()) {
-            System.out.println("Nenhum produto no catálogo.");
+            System.out.println("Nenhum produto no catalogo");
             return;
         }
         for (T produto : produtos) {

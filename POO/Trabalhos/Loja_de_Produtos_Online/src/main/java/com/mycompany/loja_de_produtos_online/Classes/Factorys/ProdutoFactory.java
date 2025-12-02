@@ -31,10 +31,9 @@ public class ProdutoFactory {
         IProdutoFactory factoryMethod = criadores.get(tipo);
         
         if (factoryMethod == null) {
-            throw new IllegalArgumentException("Tipo de produto inválido ou não registrado: " + tipo);
+            throw new IllegalArgumentException("Tipo de produto invalido ou nao registrado: " + tipo);
         }
 
-        // Delega a criação ao objeto Factory Method específico
         return factoryMethod.criar(nome, preco, descricao, parametros);
     }
 }

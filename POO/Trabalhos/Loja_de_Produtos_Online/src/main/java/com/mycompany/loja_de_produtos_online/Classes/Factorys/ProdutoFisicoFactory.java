@@ -17,7 +17,7 @@ public class ProdutoFisicoFactory implements IProdutoFactory {
 
     @Override
     public Produto criar(String nome, double preco, String descricao, Map<String, Object> parametros) {
-        // Obtenção segura dos parâmetros específicos
+        
         double peso = (double) parametros.getOrDefault("peso", 0.0);
         String dimensao = (String) parametros.getOrDefault("dimensao", "N/A");
         

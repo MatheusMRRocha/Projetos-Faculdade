@@ -16,34 +16,27 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
 
-/**
- * Interface de Terminal para interagir com o sistema da Loja Online.
- * Foi ajustada para usar um caminho de arquivo absoluto para persistência.
- */
 public class Terminal {
     private final Catalogo<Produto> catalogo;
     private final CarrinhoDeCompras carrinho;
     private final ProdutoFactory factory;
     private final Scanner scanner;
     
-    // CAMINHO ABSOLUTO SOLICITADO PELO USUÁRIO (com barras duplas)
     private final String CAMINHO_ARQUIVO_CATALOGO = "C:\\Users\\mathe\\OneDrive\\Documentos\\GitHub\\Projetos-Faculdade\\POO\\Trabalhos\\Loja_de_Produtos_Online\\src\\main\\java\\com\\mycompany\\loja_de_produtos_online\\Classes\\Dados\\catalogo_loja.txt";
 
-    public Terminal(Catalogo<Produto> catalogo, ProdutoFactory factory) {
+    public Terminal(Catalogo<Produto> catalogo, ProdutoFactory factory){
         this.catalogo = catalogo;
         this.carrinho = new CarrinhoDeCompras();
         this.factory = factory;
         this.scanner = new Scanner(System.in);
     }
 
-    public void iniciar() {
-        // Tenta carregar dados ao iniciar
+    public void iniciar(){
         try {
             catalogo.carregarCatalogo(CAMINHO_ARQUIVO_CATALOGO);
         } catch (IOException e) {
-            System.err.println("\n[ERRO DE CARREGAMENTO] Não foi possível carregar o catálogo. Iniciando com catálogo vazio.");
+            System.err.println("\nERRO DE CARREGAMENTO");
             System.err.println("Detalhe: " + e.getMessage());
-            // Não é um erro fatal, apenas inicia a lista vazia.
         }
 
         int opcao;
@@ -51,11 +44,11 @@ public class Terminal {
             exibirMenuPrincipal();
             try {
                 opcao = scanner.nextInt();
-                scanner.nextLine(); // Consome a nova linha
+                scanner.nextLine(); 
                 processarOpcao(opcao);
             } catch (InputMismatchException e) {
-                System.out.println("\n[ERRO] Entrada inválida. Por favor, digite um número.");
-                scanner.nextLine(); // Limpa o buffer
+                System.out.println("\n[ERRO] Entrada invalida, Por favor, digite um numero");
+                scanner.nextLine();
                 opcao = -1;
             } catch (Exception e) {
                 System.err.println("\n[ERRO INESPERADO] " + e.getMessage());
@@ -72,14 +65,14 @@ public class Terminal {
         System.out.println("\n==================================");
         System.out.println("     LOJA ONLINE - MENU PRINCIPAL");
         System.out.println("==================================");
-        System.out.println("1. Exibir Catálogo");
-        System.out.println("2. Adicionar Novo Produto (Factory)");
-        System.out.println("3. Adicionar Produto ao Carrinho");
-        System.out.println("4. Visualizar Carrinho de Compras (" + carrinho.getPrecoTotal() + " R$)");
-        System.out.println("5. Finalizar Pedido (Strategy)");
-        System.out.println("6. Salvar Catálogo (Persistência)");
-        System.out.println("0. Sair");
-        System.out.print("Escolha uma opção: ");
+        System.out.println("1) Exibir Catalogo");
+        System.out.println("2) Adicionar Novo Produto");
+        System.out.println("3) Adicionar Produto ao Carrinho");
+        System.out.println("4) Visualizar Carrinho de Compras (" + carrinho.getPrecoTotal() + " R$)");
+        System.out.println("5) Finalizar Pedido");
+        System.out.println("6) Salvar Catalogo");
+        System.out.println("0) Sair");
+        System.out.print("Escolha uma opcao: ");
     }
 
     private void processarOpcao(int opcao) {
@@ -114,7 +107,7 @@ public class Terminal {
         try {
             catalogo.salvarCatalogo(CAMINHO_ARQUIVO_CATALOGO);
         } catch (IOException e) {
-            System.err.println("\n[ERRO] Falha catastrófica ao salvar o catálogo: " + e.getMessage());
+            System.err.println("\n[ERRO] Falha salvar o catalogo: " + e.getMessage());
         }
     }
 
@@ -125,7 +118,7 @@ public class Terminal {
         System.out.print("Preço (ex: 50.00): ");
         double preco = scanner.nextDouble();
         scanner.nextLine(); 
-        System.out.print("Descrição: ");
+        System.out.print("Descricao: ");
         String descricao = scanner.nextLine();
 
         System.out.print("Tipo (FISICO ou DIGITAL): ");
@@ -148,22 +141,21 @@ public class Terminal {
                 String url = scanner.nextLine();
                 params = Map.of("downloadUrl", url);
             } else {
-                throw new IllegalArgumentException("Tipo de produto não suportado.");
+                throw new IllegalArgumentException("Tipo de produto nao suportado");
             }
 
-            // Criação do produto usando a Factory OCP
             novoProduto = factory.criarProduto(tipo, nome, preco, descricao, params);
             catalogo.adicionarProduto(novoProduto);
 
         } catch (IllegalArgumentException | InputMismatchException e) {
-            System.err.println("\n[ERRO DE CRIAÇÃO] Dados inválidos ou tipo não reconhecido. " + e.getMessage());
-            if (scanner.hasNextLine()) scanner.nextLine(); // Limpa o buffer se necessário
+            System.err.println("\n[ERRO DE CRIAÇÃO] Dados invalidos ou tipo nao reconhecido. " + e.getMessage());
+            if (scanner.hasNextLine()) scanner.nextLine();
         }
     }
     
     private void adicionarAoCarrinho() {
         if (catalogo.listarTodos().isEmpty()) {
-            System.out.println("\nO catálogo está vazio. Adicione produtos primeiro (Opção 2).");
+            System.out.println("\nO catálogo está vazio");
             return;
         }
         
@@ -181,27 +173,27 @@ public class Terminal {
                 carrinho.adicionarItem((ICarrinho) produtoOpt.get());
                 System.out.printf("\n[SUCESSO] '%s' adicionado ao carrinho.\n", produtoOpt.get().getNome());
             } else {
-                System.out.println("\n[ERRO] ID do produto não encontrado no catálogo.");
+                System.out.println("\n[ERRO] ID do produto nao encontrado no catalogo");
             }
         } catch (InputMismatchException e) {
-            System.out.println("\n[ERRO] Por favor, digite um número de ID válido.");
+            System.out.println("\n[ERRO] Por favor, digite um numero de ID valido");
             scanner.nextLine();
         }
     }
 
     private void finalizarPedido() {
         if (carrinho.getPrecoTotal() == 0.0) {
-            System.out.println("\n[ERRO] O carrinho está vazio. Adicione itens antes de finalizar o pedido.");
+            System.out.println("\n[ERRO] O carrinho está vazio, Adicione itens antes de finalizar o pedido");
             return;
         }
 
         System.out.println("\n--- FINALIZAR PEDIDO ---");
         System.out.printf("Total a Pagar: R$ %.2f\n", carrinho.getPrecoTotal());
         
-        System.out.println("Escolha a forma de pagamento (Strategy):");
-        System.out.println("1. Cartão de Crédito");
-        System.out.println("2. Boleto Bancário");
-        System.out.print("Opção: ");
+        System.out.println("Escolha a forma de pagamento:");
+        System.out.println("1. Cartao de Credito");
+        System.out.println("2. Boleto Bancario");
+        System.out.print("Opcao: ");
 
         int opPagamento;
         try {
@@ -212,9 +204,9 @@ public class Terminal {
             PagamentoStrategy estrategia;
             
             if (opPagamento == 1) {
-                System.out.print("Nome no cartão: ");
+                System.out.print("Nome no cartao: ");
                 String nome = scanner.nextLine();
-                System.out.print("Número do cartão: ");
+                System.out.print("Número do cartao: ");
                 String numero = scanner.nextLine();
                 estrategia = new PagamentoCartao(nome, numero);
                 
@@ -224,16 +216,16 @@ public class Terminal {
                 estrategia = new PagamentoBoleto(cpf);
                 
             } else {
-                System.out.println("\n[ERRO] Opção de pagamento inválida.");
+                System.out.println("\n[ERRO] Opçao de pagamento invalida.");
                 return;
             }
 
             processador.setEstrategiaPagamento(estrategia);
             processador.finalizarPedido(carrinho);
-            carrinho.esvaziarCarrinho(); // Limpa o carrinho após a finalização
+            carrinho.esvaziarCarrinho();
             
         } catch (InputMismatchException e) {
-            System.out.println("\n[ERRO] Por favor, digite um número válido para a opção de pagamento.");
+            System.out.println("\n[ERRO] Por favor, digite um numero valido para a opção de pagamento");
             scanner.nextLine();
         }
     }
