@@ -1,0 +1,14 @@
+body{
+	display:flex;
+	height:100vh;
+	align-items:center;
+	justify-content:center;
+}
+.calculadora{ 
+	width:300px;
+	padding:20px;
+	text-align:center;
+}]
+.btn btn-primary btn-lg btn-block{
+	color:green;
+}

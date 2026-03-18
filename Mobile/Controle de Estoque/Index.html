@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+		<title>Controle de Estoque</title>
+			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+			<link rel="stylesheet" href="style.css">
+		</head>
+		<body>
+			<div class="calculadora">
+				<h2>Quantidade Atual</h2>
+				
+				<input type="number" id="qAtual"><br>
+				<class="form-control mb-2" placeholder="Quantidade Atual">
+				
+				<h2>Quantidade Vendida</h2>
+				
+				<input type="number" id="qVendida"><br>
+				<class="form-control mb-2" placeholder="Quantidade Vendida">
+				
+				<button color=green onclick="calcular()" class="btn btn-primary btn-lg btn-block">Calcular</button>
+				<button onclick="limpar()" class="btn btn-primary btn-lg btn-block">Limpar</button>
+				<p id="resultado"></p>
+			</div>
+			<script SRC="script.js"></script>
+		</body>
+	</html>
