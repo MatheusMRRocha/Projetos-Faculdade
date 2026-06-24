@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval' https://fonts.googleapis.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: content:; media-src *;">
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; frame-src *; font-src * data: 'unsafe-inline';">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
@@ -54,7 +54,51 @@
                     <button type="button" id="btn-guest" class="btn-outline" style="margin-top: 12px; width: 100%;">Continuar sem conta</button>
                     
                     <div class="login-actions">
-                        <a href="#" class="link">Esqueceu a senha?</a>
+                        <a href="#" class="link" id="link-forgot-pwd">Esqueceu a senha?</a>
+                        <span style="color: var(--text-muted); margin: 0 8px;">|</span>
+                        <a href="#" class="link" id="link-register">Criar conta</a>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- View: Register -->
+        <section id="view-register" class="view">
+            <div class="login-wrapper">
+                <div class="brand">
+                    <h1>Nova Conta</h1>
+                    <p>Junte-se à Skala</p>
+                </div>
+                
+                <form id="register-form" class="glass-panel">
+                    <div class="input-group">
+                        <label for="reg-name">Nome Completo</label>
+                        <div class="input-icon-wrapper">
+                            <span class="material-symbols-rounded icon">person</span>
+                            <input type="text" id="reg-name" placeholder="Digite seu nome" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="reg-email">E-mail</label>
+                        <div class="input-icon-wrapper">
+                            <span class="material-symbols-rounded icon">mail</span>
+                            <input type="email" id="reg-email" placeholder="Digite seu e-mail" required>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="reg-password">Senha</label>
+                        <div class="input-icon-wrapper">
+                            <span class="material-symbols-rounded icon">lock</span>
+                            <input type="password" id="reg-password" placeholder="Digite sua senha" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Cadastrar</button>
+                    
+                    <div class="login-actions">
+                        <a href="#" class="link" id="link-login">Já tenho uma conta</a>
                     </div>
                 </form>
             </div>
@@ -121,11 +165,11 @@
                         <h3>Ações Rápidas (Gestor)</h3>
                     </div>
                     <div class="quick-actions">
-                        <button class="action-card glass-panel">
+                        <button class="action-card glass-panel" id="btn-new-shift">
                             <span class="material-symbols-rounded accent">add_circle</span>
                             <span>Novo Turno</span>
                         </button>
-                        <button class="action-card glass-panel">
+                        <button class="action-card glass-panel" id="btn-approve-swaps">
                             <span class="material-symbols-rounded accent">swap_horiz</span>
                             <span>Aprovar Trocas</span>
                         </button>
@@ -136,6 +180,120 @@
                 <div style="height: 80px;"></div>
             </main>
         </section>
+
+        <!-- View: Calendar -->
+        <section id="view-calendar" class="view">
+            <header class="app-header glass-panel">
+                <div class="user-info">
+                    <div class="avatar">
+                        <span class="material-symbols-rounded">calendar_month</span>
+                    </div>
+                    <div>
+                        <h2>Agenda</h2>
+                        <p class="badge">Seus eventos</p>
+                    </div>
+                </div>
+            </header>
+            <main class="content-scroll">
+                <div class="section-title">
+                    <h3>Agenda da Semana</h3>
+                    <a href="#" class="link">Filtrar</a>
+                </div>
+                <div class="shifts-list" id="calendar-list">
+                    <!-- Dinâmico via JS -->
+                </div>
+                <div style="height: 80px;"></div>
+            </main>
+        </section>
+
+        <!-- View: Manage -->
+        <section id="view-manage" class="view">
+            <header class="app-header glass-panel">
+                <div class="user-info">
+                    <div class="avatar">
+                        <span class="material-symbols-rounded">manage_accounts</span>
+                    </div>
+                    <div>
+                        <h2>Equipe</h2>
+                        <p class="badge">Gestão de plantões</p>
+                    </div>
+                </div>
+            </header>
+            <main class="content-scroll">
+                <div class="section-title">
+                    <h3>Time</h3>
+                    <a href="#" class="link">Adicionar</a>
+                </div>
+                <div class="shifts-list" id="team-list">
+                    <!-- Dinâmico via JS -->
+                </div>
+                <div style="height: 80px;"></div>
+            </main>
+        </section>
+
+        <!-- View: Profile -->
+        <section id="view-profile" class="view">
+            <header class="app-header glass-panel">
+                <div class="user-info">
+                    <div class="avatar">
+                        <span class="material-symbols-rounded">person</span>
+                    </div>
+                    <div>
+                        <h2>Meu Perfil</h2>
+                        <p class="badge">Dados da conta</p>
+                    </div>
+                </div>
+            </header>
+            <main class="content-scroll">
+                <div class="shift-card glass-panel">
+                    <h4 class="shift-title">Perfil</h4>
+                    <div class="shift-details">
+                        <p><span class="material-symbols-rounded">person</span> <span id="profile-name">Usuário Padrão</span></p>
+                        <p><span class="material-symbols-rounded">email</span> <span id="profile-email">nenhum@email.com</span></p>
+                        <p><span class="material-symbols-rounded">badge</span> <span id="profile-role">Perfil</span></p>
+                    </div>
+                </div>
+                <button id="btn-logout" class="btn-primary">Sair</button>
+                <div style="height: 80px;"></div>
+            </main>
+        </section>
+
+        <!-- Modal: Novo Turno -->
+        <div id="modal-new-shift" class="modal-overlay hidden">
+            <div class="modal-content glass-panel">
+                <div class="modal-header">
+                    <h3>Criar Novo Turno</h3>
+                    <button class="btn-icon" id="btn-close-modal">
+                        <span class="material-symbols-rounded">close</span>
+                    </button>
+                </div>
+                <form id="form-new-shift" class="modal-body">
+                    <div class="input-group">
+                        <label for="shift-title">Título do Plantão</label>
+                        <input type="text" id="shift-title" placeholder="Ex: Plantão Noturno - UTI" required>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="shift-date">Data e Hora</label>
+                            <input type="text" id="shift-date" placeholder="Ex: 15 Nov • 19:00" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="shift-duration">Duração</label>
+                            <input type="text" id="shift-duration" placeholder="Ex: 12h" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="shift-location">Local</label>
+                        <input type="text" id="shift-location" placeholder="Ex: Hospital Central" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="shift-desc">Descrição (Opcional)</label>
+                        <input type="text" id="shift-desc" placeholder="Detalhes adicionais do plantão">
+                    </div>
+                    <button type="submit" class="btn-primary" style="margin-top: 16px;">Criar Turno</button>
+                </form>
+            </div>
+        </div>
 
         <!-- Bottom Navigation -->
         <nav id="bottom-nav" class="bottom-nav glass-panel hidden">
@@ -159,7 +317,11 @@
 
     </div>
 
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script src="cordova.js"></script>
+    <script src="js/firebase/firebase-config.js"></script>
     <script src="js/index.js"></script>
 </body>
 </html>
